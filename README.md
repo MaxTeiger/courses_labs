@@ -8,5 +8,6 @@
 ### Lab requirements
 
 Please be sure your Python packages are up to date by running the following command:
-    
-   pip install -Ur requirements.txt
+```    
+pip install -Ur requirements.txt
+```
