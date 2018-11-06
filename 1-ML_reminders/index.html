@@ -190,10 +190,10 @@ Recommended reading: [deeplearningbook.org](http://www.deeplearningbook.org/)
 
 - Suppose we have a target $y \in \mathbb{R}$ and a feature sample $\mathbf{x} \in \mathbb{R}^p$, suspiciously linearly dependant
 
-- Now let $\mathbf{\omega} \in \mathbb{R}^p$ our parameters vector and $\sigma^2 > 0$ the variance fixed to some constant, then we can make the following assumption:
+- Now let $\mathbf{\theta} \in \mathbb{R}^p$ our parameters vector and $\sigma^2 > 0$ the variance fixed to some constant, then we can make the following assumption:
 
 .center[
-$p(y | \mathbf{x} ; \mathbf{\omega}, \sigma) = \mathcal{N}(y ; \mathbf{\omega}^\top \mathbf{x}, \sigma^2) = \frac{1}{\sqrt{2 \pi \sigma^2}} \exp{(-\frac{(y - \langle {\mathbf{x}, \mathbf{\omega}} \rangle) ^2}{2 \sigma^2})}$
+$p(y | \mathbf{x} ; \mathbf{\theta}, \sigma) = \mathcal{N}(y ; \mathbf{\theta}^\top \mathbf{x}, \sigma^2) = \frac{1}{\sqrt{2 \pi \sigma^2}} \exp{(-\frac{(y - \langle {\mathbf{x}, \mathbf{\theta}} \rangle) ^2}{2 \sigma^2})}$
 ]
 
 ---
@@ -201,13 +201,13 @@ $p(y | \mathbf{x} ; \mathbf{\omega}, \sigma) = \mathcal{N}(y ; \mathbf{\omega}^\
 # Linear Regression
 
 - Let $\mathcal{D} = ${$ (\mathbf{x}_1, y_1), \dotsc, (\mathbf{x}_n, y_n)$} be a training set of i.i.d variables<br/><br/>
-- We have: $p(y_1, \dotsc, y_n | \mathbf{x}_1, \dotsc, \mathbf{x}_n ; \mathbf{\omega})  = \prod_1^n p(y_i | \mathbf{x}_i ; \mathbf{\omega})$
+- We have: $p(y_1, \dotsc, y_n | \mathbf{x}_1, \dotsc, \mathbf{x}_n ; \mathbf{\theta})  = \prod_1^n p(y_i | \mathbf{x}_i ; \mathbf{\theta})$
 - Maximize this conditional distribution is equivalent to minimizing the following negative log-likelihood:
 
-.center[$- \sum_1^n \log p(y_i | \mathbf{x}_i ; \mathbf{\omega}, \sigma) = - \sum_1^n \log \mathcal{N}(y_i ; \mathbf{\omega}^\top \mathbf{x}_i, \sigma^2)$<br/>$
-= n \log \sigma + \frac{n}{2} \log(2 \pi) + \frac{1}{2} \sum_1^n \frac{(y_i - \langle {\mathbf{x}_i, \mathbf{\omega}} \rangle) ^2}{\sigma^2}$]<br/><br/>
-- It naturally leads to the MSE minimization with respect to $\mathbf{\omega}$: 
-.center[find $\hat{\mathbf{\omega}} = \underset{\mathbf{\omega}}{\operatorname{argmin}} \frac{1}{2n} \sum_1^n (y_i - \langle {\mathbf{x}_i, \mathbf{\omega}} \rangle) ^2$]
+.center[$- \sum_1^n \log p(y_i | \mathbf{x}_i ; \mathbf{\theta}, \sigma) = - \sum_1^n \log \mathcal{N}(y_i ; \mathbf{\theta}^\top \mathbf{x}_i, \sigma^2)$<br/>$
+= n \log \sigma + \frac{n}{2} \log(2 \pi) + \frac{1}{2} \sum_1^n \frac{(y_i - \langle {\mathbf{x}_i, \mathbf{\theta}} \rangle) ^2}{\sigma^2}$]<br/><br/>
+- It naturally leads to the MSE minimization with respect to $\mathbf{\theta}$: 
+.center[find $\hat{\mathbf{\theta}} = \underset{\mathbf{\theta}}{\operatorname{argmin}} \frac{1}{2n} \sum_1^n (y_i - \langle {\mathbf{x}_i, \mathbf{\theta}} \rangle) ^2$]
 
 ---
 
@@ -216,10 +216,10 @@ $p(y | \mathbf{x} ; \mathbf{\omega}, \sigma) = \mathcal{N}(y ; \mathbf{\omega}^\
 Compact and closed forms:
 
 - We denote $\mathbf{X} \in \mathbb{R}^{n \times p}$ our training design matrix, and $\mathbf{y} \in \mathbb{R}^n$ our target vector
-- The minimization problem over $\mathbf{\omega}$ can be rewritten as:
-.center[find $\hat{\mathbf{\omega}} = \underset{\mathbf{\omega}}{\operatorname{argmin}} \frac{1}{2n} || \mathbf{y} - \mathbf{X} \mathbf{\omega} ||_2 ^2 = \underset{\mathbf{\omega}}{\operatorname{argmin}} J(\omega)$]
+- The minimization problem over $\mathbf{\theta}$ can be rewritten as:
+.center[find $\hat{\mathbf{\theta}} = \underset{\mathbf{\theta}}{\operatorname{argmin}} \frac{1}{2n} || \mathbf{y} - \mathbf{X} \mathbf{\theta} ||_2 ^2 = \underset{\mathbf{\theta}}{\operatorname{argmin}} J(\theta)$]
 with $J$ being our loss function we want to minimize
-- $\nabla J(\omega) = 0 \Leftrightarrow \frac{1}{n} \mathbf{X}^\top (\mathbf{X} \hat{\omega} - \mathbf{y}) = 0 \Leftrightarrow \hat{\omega} = (\mathbf{X}^\top \mathbf{X})^{-1} \mathbf{X}^\top \mathbf{y}$
+- $\nabla J(\theta) = 0 \Leftrightarrow \frac{1}{n} \mathbf{X}^\top (\mathbf{X} \hat{\theta} - \mathbf{y}) = 0 \Leftrightarrow \hat{\theta} = (\mathbf{X}^\top \mathbf{X})^{-1} \mathbf{X}^\top \mathbf{y}$
 
 The last equation is known as the **normal equation**
 
@@ -232,7 +232,7 @@ The last equation is known as the **normal equation**
 
 - Iterative algorithm using the information from the gradient of the loss function to make a step
 - For step $t$, make a step forward the negative gradient:<br/> 
-.center[$\mathbf{\omega}^{t+1} := \mathbf{\omega}^{t} - \epsilon \nabla_\mathbf{\omega} J(\mathbf{\omega})$]
+.center[$\mathbf{\theta}^{t+1} := \mathbf{\theta}^{t} - \epsilon \nabla_\mathbf{\theta} J(\mathbf{\theta})$]
 
 .center[<img src="images/gradient_descent.png" style="width: 475px;" /> ]
 <sub><sup>.center.small[Unidimensional example of how the gradient descent uses the derivatives to reach to a minimum]
@@ -262,7 +262,7 @@ The last equation is known as the **normal equation**
 # Overfitting and penalization
 
 - Modifying the loss the include a **penalization term**, here the penalization $L2$, or **ridge** penalization:<br/>
-.center[$J(\mathbf{\omega}) = MSE_{train} + \lambda || \mathbf{\theta} ||^2_2$]
+.center[$J(\mathbf{\theta}) = MSE_{train} + \lambda || \mathbf{\theta} ||^2_2$]
 
 .center[<img src="images/under_right_over.png" style="width: 700px;" /> ]
 
@@ -457,7 +457,7 @@ $ = (\mathbb{E}[\hat{\mathbf{\theta}}\_{train}] - \mathbf{\theta})^2 + Var(\hat{
 # ML versus DL
 - .grey[Machine Learning]
   - <sub><sup>.grey[A human worker thinks of smart features "relevant for the prediction"]<sub><sup>
-  - <sub><sup>.grey[The ML algorithm finds a general pattern from input to ouput, with respect to the cost function used and the training data sampled]<sub><sup>
+  - <sub><sup>.grey[The ML algorithm finds a general pattern from input to output, with respect to the cost function used and the training data sampled]<sub><sup>
 - Deep Learning
   - <sub>Combines the inputs from layer to layer such that final representation of input data is linear
 .center[<img src="images/dl_vs.png" style="width: 600px;" />]
