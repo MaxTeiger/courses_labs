@@ -322,9 +322,10 @@ $ = (\mathbb{E}[\hat{\mathbf{\theta}}\_{train}] - \mathbf{\theta})^2 + Var(\hat{
   - <sub> $\sigma(x) = \frac{1}{1 + \exp(-x)} = \frac{\exp(x)}{1 + \exp(x)}$
   - <sub>$\sigma(x)^{\prime} = \sigma(x)(1-\sigma(x))$
   - <sub> In practice, $\mathbf{x}$ not described by $1$ dimension but $m$ dimensions.
-      - <sub> $P(y=1|\mathbf{x})$ modelized by $h_\theta(\mathbf{x})$ $= h(\mathbf{x};\theta)$ $=  \sigma(\mathbf{\theta}^T.\mathbf{x})$ $= \frac{1}{1 + \exp(-\mathbf{\theta}^T.\mathbf{x})}$ with $\mathbf{x} \in \mathbb{R}^m$, the vector of features and $\mathbf{\theta} \in \mathbb{R}^m$ the vector of parameters
-  - <sub>Usually for binary classification with log-likelihood loss
-      -  <sub>$L(x) = -\frac{1}{n}\sum_{i=1}^{n}y_i\cdot\log(\sigma(\theta^T.\mathbf{x_i})) + (1-y_i)\cdot\log(1-\sigma(\theta^T.\mathbf{x_i}))$ 
+      - <sub> $P(y=1|\mathbf{x})$ modelized by $\sigma(\mathbf{\theta}^T\mathbf{x})$ $= \frac{1}{1 + \exp(-\mathbf{\theta}^T\mathbf{x})}$</br> with $\mathbf{x} \in \mathbb{R}^m$, the vector of features and $\mathbf{\theta} \in \mathbb{R}^m$ the vector of parameters
+  - <sub>Usually for binary classification we use the binary cross-entropy loss:
+      -  <sub>$J(\mathbf{\theta}) = -\frac{1}{n}\sum_{i=1}^{n}y_i\cdot\log(\sigma(\theta^T\mathbf{x_i})) + (1-y_i)\cdot\log(1-\sigma(\theta^T\mathbf{x_i}))$ 
+
 ---
 
 # Logistic Regression
@@ -334,7 +335,7 @@ $ = (\mathbb{E}[\hat{\mathbf{\theta}}\_{train}] - \mathbf{\theta})^2 + Var(\hat{
   - Not linear in a way that if a probability is already very strong or very low, it needs a big increment from the input to make it stronger or lower
   - Like many physical world phenomena : physical performance with respect to training, happiness sensation with respect to wealth..
 
-- Logistic Regression belongs to Generalized Linear Model type. Why ?
+- Logistic Regression belongs to Generalized Linear Model (GLM) type. Why ?
   - Sigmoid function is not linear but Logistic Regression model boundary decision function is linear. What does that mean ?
   .center[
   $prediction =
@@ -344,12 +345,12 @@ $ = (\mathbb{E}[\hat{\mathbf{\theta}}\_{train}] - \mathbf{\theta})^2 + Var(\hat{
   \end{cases}$ 
    $\Leftrightarrow$ $
   \begin{cases}
-    1 \text{ if } \mathbf{\theta}^T.\mathbf{x} \geq 0\\\\
-    0 \text{ if } \mathbf{\theta}^T.\mathbf{x} < 0
+    1 \text{ if } \mathbf{\theta}^T\mathbf{x} \geq 0\\\\
+    0 \text{ if } \mathbf{\theta}^T\mathbf{x} < 0
   \end{cases}$
   ]
 
-  - Separation between $1$s and $0$s predicted samples is the plane $\theta^T.\mathbf{x} = 0$
+  - Separation between $1$s and $0$s predicted samples is the plane $\theta^T\mathbf{x} = 0$
 ]
 
 ---
@@ -358,43 +359,33 @@ $ = (\mathbb{E}[\hat{\mathbf{\theta}}\_{train}] - \mathbf{\theta})^2 + Var(\hat{
 # Logistic Regression
 ### As the activation of an artificial neuron
 
---
 .left-column70.small[
 - Weighted sum of numerical features as input of an activation function which output range is $\sqsupset0,1\sqsubset$
-[//]: #  ($\sqsupset0,1\sqsubset$)
 ]
 
---
 .right-column30.small[<img src="images/artificial_neuron.png" style="width: 300px;" />
 - Mathematical imitation of a neuron receiving neurotransmeters leading to excitatory/inhibitory state
 ]
 
---
-.-column70.small[
+.right-column70.small[
 - Output signal is $\sigma(\beta_1\cdot x_1 + \dotsc + \beta_n\cdot x_n + bias) \mapsto \sqsupset0,1\sqsubset$
 ]
 
---
 .left-column70.small[<img src="images/artificial_neuron.gif" style="width: 430px;" />]
 ---
 
 # Goal and outline of the Deep Learning class
 
---
 - Understand what Deep Learning is
 
---
   - <sub>How and why it works
   - <sub>When to use it and when not to
   - <sub>Have a broad understanding of its applications
 
 --
 <br>
-<br>
-<br>
 - Practical matters
 
---
   - <sub>Learn how to implement neurals nets with different frameworks
   - <sub>Manipulate low level concepts such as backpropagation of the gradient
 
@@ -403,20 +394,18 @@ $ = (\mathbb{E}[\hat{\mathbf{\theta}}\_{train}] - \mathbf{\theta})^2 + Var(\hat{
 
 # What is Deep Learning ?
 
---
-
 - #### Non-linear, hierarchical, abstract representations of data
 
 --
 
 - #### Very flexible models to find pattern from any input to output size - __Universal Approximation Theorem__:
 
---
 > <sub>"A feedforward network with a single layer is sufficient to represent any function, but the layer may be infeasibly large and may fail to learn and generalize correctly"</sub>
 >
 > <sub>-- <cite>Ian Goodfellow</cite></sub>
 
 --
+
 - #### Differentiable functions, it leads to gradient based optimization
 
 ---
@@ -426,13 +415,13 @@ $ = (\mathbb{E}[\hat{\mathbf{\theta}}\_{train}] - \mathbf{\theta})^2 + Var(\hat{
 
 --
 - Traditional Machine Learning's weakness :
+.small90[
+  - Numerical features to built can be counterintuitive for a human
+- Therefore difficult to modelize them
+]
 
 --
-  - <sub>Numerical features to built can be counterintuitive for a human
 
-
-  - <sub>Therefore difficult to modelize them
---
 .center[<img src="images/ml_vs_dl.png" style="width: 500px;" />]
 - Quelques exemples : tâches liées aux signaux __audio__, computer __vision__, Natural __Language__ Processing
 ---
