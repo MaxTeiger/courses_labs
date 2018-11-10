@@ -5,6 +5,8 @@
   src="1-ML_reminders/images/ece_logo.png" width="300"/></a>
 </p>
 
+Courses and labs will be added and updated in weeks, please be sure to pull frequently
+
 ### Lab requirements
 
 Please be sure your Python packages are up to date by running the following command:
