@@ -343,7 +343,7 @@ $$
 
 - Function directly applied on a whole vector and return a vector of values in $(0, 1)$ that sums to 1
 - So, it can naturally represent a probability distribution, </br>with $p(Y = c|X = \mathbf{x}) = \text{softmax}(\mathbf{z}(\mathbf{x}))_c$ being the probability that the class $c$ is the associated class for the sample $\mathbf{x}$ according to our model, and $\mathbf{z}(\mathbf{x})$ being our pre-activation vector
-- In practice, the softmax actvation function is generally used for multi-class classification problems
+- In practice, the softmax activation function is generally used for multi-class classification problems
 
 ---
 
@@ -700,6 +700,9 @@ How should we proceed ?
 ]
 ---
 
+# Batch Normalization
+.center[<img src="images/batchnorm.png" style="width: 550px;margin-left:-0%;margin-top: 5%;" />]
+---
 
 # Regularization
 .small90[
