@@ -399,12 +399,13 @@ $\gamma \Omega(\mathbf{\Theta}) = \gamma (||W^h||^2 + ||W^o||^2)$ is an optional
 
 # Neural network optimization: a stochastic approach
 
+.big110[
 - Deep learning datasets are usually huge: $10^6 \sim 10^8$ training examples
-- In consequence, computing the gradient on the full training dataset can be extremly costly
-
+- In consequence, computing the gradient on the full training dataset can be extremely costly
 - To tackle this, a solution is the compute the gradient of a **minibatch of samples** and perform an update step with it
 - This gradient is an **unbiased estimation** of the full gradient if the minibatch sampling is performed randomly
 - Doing so, we improve the computation cost from $o(n)$ to $o(b)$, n and b being respectively the number of samples in the full dataset and in a minibatch 
+]
 
 ---
 
@@ -471,7 +472,7 @@ The red path indicates the path followed by the momentum learning rule as it min
 
 - Most used first order optimization method in the real world of deep learning
 
-- Combines the advantages of both **RMSProp** and **Momemtum** and include some others improvements
+- Combines the advantages of both **RMSProp** and **Momentum** and include some others improvements
 
 - Is generaly robust to the choice of hyperparameters
 
@@ -482,7 +483,7 @@ The red path indicates the path followed by the momentum learning rule as it min
 .left-column50[<img src="images/saddle_point_optimizers_2D.gif" style="width: 375px;" /></br></br>]
 .right-column50[<img src="images/saddle_point_optimizers_3D.gif" style="width: 375px;" /></br></br>]
 
-.center[Algorithms that use momemtum and adaptive learning rate methods perfom better at such critical point]
+.center[Algorithms that use momentum and adaptive learning rate methods perfom better at such critical point]
 
 ---
 
@@ -504,7 +505,7 @@ with respect to the model's parameters
 - if $f(x) = x \xrightarrow[\text{}]{g} y(x)$ $\\xrightarrow[\text{}]{f} z(x)$ <br/>
 and $\frac{\mathrm d z}{\mathrm d y} \left( y(x)\right)$, 
 $\frac{\mathrm d y}{\mathrm d x} \left( x \right)$ are known <br/>
-then we can compute $\frac{\mathrm d f}{\mathrm d x} \left( x \right) = \frac{\mathrm d z}{\mathrm d y} \left( y(x)\right) \cdot 
+then we can compute $\frac{\mathrm d z}{\mathrm d x} \left( x \right) = \frac{\mathrm d z}{\mathrm d y} \left( y(x)\right) \cdot 
 \frac{\mathrm d y}{\mathrm d x} \left( x \right)$
 ]
 .big110[
@@ -574,7 +575,7 @@ $
 ]
 .right-column30.small80[
 - For a given sample with true $y = k$ loss is $-\log(P\_\theta(y=k|\mathbf{x}))$
-- $loss = -\log(f(\mathbf{x})\_k) $<br/>$= -\log(P(y=k|\mathbf{x})) $<br/>
+- $loss = -\log(f(\mathbf{x})\_k) $<br/>
 ]
 ---
 
