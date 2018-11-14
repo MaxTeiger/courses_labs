@@ -9,8 +9,8 @@ Courses and labs will be added and updated in weeks, please be sure to pull freq
 
 ### Outline of the class
 
-- Week 1: [Machine Learning reminders](https://github.com/ECE-Deep-Learning/courses_labs/tree/master/1-ML_reminders)
-- Week 2: [The fundamentals of Neural Networks](https://github.com/ECE-Deep-Learning/courses_labs/tree/master/2-Fundamentals_NNs)
+- Week 1: [Machine Learning reminders](https://ece-deep-learning.github.io/courses_labs/1-ML_reminders/index.html)
+- Week 2: [The fundamentals of Neural Networks](https://ece-deep-learning.github.io/courses_labs/2-Fundamentals_NNs/index.html)
 - Week 3: Convolutional Neural Networks
 - Week 4: Deep Learning for Natural Language Processing 1
 - Week 5: Deep Learning for Natural Language Processing 2
