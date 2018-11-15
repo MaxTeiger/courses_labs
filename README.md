@@ -18,6 +18,8 @@ Courses and labs will be added and updated in weeks, please be sure to pull freq
 
 ### Lab requirements
 
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ECE-Deep-Learning/courses_labs/gh-pages)
+
 Please be sure your Python packages are up to date by running the following command:
 ```    
 pip install -Ur requirements.txt
