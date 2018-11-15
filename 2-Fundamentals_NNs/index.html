@@ -499,14 +499,13 @@ with respect to the model's parameters
 
 
 # Chain rule
-.big140[**Chain rule scalar to scalar case**
-]
+.big140[**Chain rule scalar to scalar case**]
+
 .big110[
-- if $f(x) = x \xrightarrow[\text{}]{g} y(x)$ $\\xrightarrow[\text{}]{f} z(x)$ <br/>
-and $\frac{\mathrm d z}{\mathrm d y} \left( y(x)\right)$, 
-$\frac{\mathrm d y}{\mathrm d x} \left( x \right)$ are known <br/>
-then we can compute $\frac{\mathrm d z}{\mathrm d x} \left( x \right) = \frac{\mathrm d z}{\mathrm d y} \left( y(x)\right) \cdot 
-\frac{\mathrm d y}{\mathrm d x} \left( x \right)$
+- If $f(x) = h(g(x)): x \xrightarrow[\text{}]{g} v$ $\\xrightarrow[\text{}]{h} z$ <br/>
+and $\frac{\mathrm d z}{\mathrm d v}$, 
+$\frac{\mathrm d v}{\mathrm d x}$ are known <br/>
+then we can compute $\frac{\mathrm d z}{\mathrm d x} = \frac{\mathrm d z}{\mathrm d v} \cdot \frac{\mathrm d v}{\mathrm d x}$
 ]
 .big110[
 - Since neural nets are made of nested blocks differentiable everywhere we can use the chain rule everywhere 
@@ -516,30 +515,29 @@ then we can compute $\frac{\mathrm d z}{\mathrm d x} \left( x \right) = \frac{\m
 # Chain rule
 .big140[**Chain rule general case**]
 
---
 .big110[
-- $f(x) = x \in \mathbb{R}^m \xrightarrow[\text{}]{g} y(x) \in \mathbb{R}^n$ $\xrightarrow[\text{}]{f} z(x) \in \mathbb{R}$
-   - $f(x)$ maps from vector to other vector to scalar 
+- $f(\mathbf{x}) = \mathbf{x} \in \mathbb{R}^m \xrightarrow[\text{}]{g} \mathbf{v} \in \mathbb{R}^n$ $\xrightarrow[\text{}]{h} z \in \mathbb{R}$
+   - $f(\mathbf{x})$ maps from vector to other vector to scalar 
 ]
 --
 .big110[
-- $\frac{\partial z}{\partial x\_{i}} \left( x \right) = \sum\_{j} \frac{\partial z}{\partial y\_j} \left( y(x) \right)\cdot \frac{\partial y\_j}{\partial x\_i} \left( x \right)$
+- $\frac{\partial z}{\partial \mathbf{x}\_{i}} = \sum\_{j} \frac{\partial z}{\partial \mathbf{v}\_j} \cdot \frac{\partial \mathbf{v}\_j}{\partial \mathbf{x}\_i}$
 ]
 --
 .big110[
-- Vector notation: $\frac{\partial z}{\partial x\_{i}} =\nabla\_{y} z$ $\cdot (\frac{\partial y}{\partial x\_i} \left( x \right))^T = (\nabla\_{x} z)\_i$ 
+- Vector notation: $\frac{\partial z}{\partial \mathbf{x}\_{i}} = (\frac{\partial \mathbf{v}}{\partial \mathbf{x}\_i})^T \cdot \nabla\_{\mathbf{v}} z = (\nabla\_{\mathbf{x}} z)\_i$ 
 ]
 --
 .big110[
-- Vector notation whole gradient: $\nabla\_{x} z = \nabla\_{y} z$ $\cdot (\frac{\partial y}{\partial x} \left( x \right))^T $
-   - $\frac{\partial y}{\partial x} \left( x \right)$ is the $n × m$ Jacobian matrix of $g$
+- Vector notation whole gradient: $\nabla\_{\mathbf{x}} z = (\frac{\partial \mathbf{v}}{\partial \mathbf{x}})^T \cdot \nabla\_{\mathbf{v}} z$ </br>
+   where $\frac{\partial \mathbf{v}}{\partial \mathbf{x}}$ is the $n × m$ Jacobian matrix of $g$
 ]
 ---
 
 # Backpropagation
-<br/>
-- Back-propagation refers to the method for computing the gradient
-- Another algorithm, such as stochastic gradient descent, makes use of it to compute gradients and perform learning
+Back-propagation refers to the method for **computing** the gradient
+
+Another algorithm, such as stochastic gradient descent, makes use of it to compute gradients and perform learning
 
 We are going to see how it works through 2 examples:
 - A simple toy example
@@ -548,11 +546,15 @@ We are going to see how it works through 2 examples:
 
 # Backpropagation
 A simple toy example:
-- We have gradients of $y$ with respect to $l0$
-- We have gradients of $l0$ with respect to $l1$
-- This allows to backpropagate gradients of $y$ from with respect to $l0$ to with respect to $l1$
+- We have gradients of $y$ with respect to $l_1$
+- We have gradients of $l_1$ with respect to $l_0$
+- This allows to backpropagate gradients of $y$ from with respect to $l_1$ to with respect to $l_0$
 
-.center[<img src="images/backpropagation_simple.png" style="width: 550px;margin-top:-4%;" />]
+.left-column50[<img src="images/simple_backprop.png" style="width: 550px;margin-top:-4%;" />]
+.right-column30[
+Node .firebrick[b] derivative calculation:
+$\frac{\partial e}{\partial b} = \sum\_{j \in \(c, d\)} \frac{\partial e}{\partial j} \cdot \frac{\partial j}{\partial b}$
+]
 ---
 
 # Backpropagation
@@ -651,7 +653,7 @@ How should we proceed ?
 - Initialization of vectors of biases parameters $b_i$:
    - Biases ought to be initialized to zero
       - Random biases init may lead to dead units by making the relu activation
-  zero or saturating $tanh$/$\sigma$ activations i.e pushing the activations to point where their gradient $= 0$
+  zero or saturating $tanh$ and $\sigma$ activations i.e pushing the activations to point where their gradient $= 0$
 ]
 --
 .small85[
@@ -696,7 +698,7 @@ How should we proceed ?
 --
 .big110[
 - Networks train faster : more parameters but converges much faster
-- Provides some regulirization
+- Provides some regularization
 - Allows to build better very deep networks
 ]
 ---
@@ -782,7 +784,7 @@ its training error”
 Focus on $3$ Frameworks: TensorFlow, PyTorch, Keras]
 <br/>
 <br/>
-.center[<img src="images/tensorflow.png" style="width: 200px;margin-top: 0%;margin-left: 0%;" />]
+.center[<img src="images/tensorflow.png" style="width: 175px;margin-top: 0%;margin-left: 0%;" />]
 <br/>
 --
 .small80[- Most famous Deep Learning framework]
@@ -855,19 +857,16 @@ How does it work ?
 ---
 
 # Keras: the functional API
-.small80[Keras functional API key points]
-
 .left-column70.small70[
 1 - Defining Input
 - Unlike the Sequential model, you must create and define a standalone Input layer that specifies the shape of input data
 - The input layer takes a tuple argument that indicates the shape of the input
-- If input is a vector, shape leaves room for the mini-batch size
-  - Thus often hanging last axis shape value
+- If input is a vector, shape leaves room for the mini-batch size, thus often hanging last axis shape value
 
 2 - Connecting 
 - The layers in the model are connected pairwise
 - When defining a layer, you specify which layer is the input to this layer
-   -  Input to layer is placed between brackets after defining layer
+-  Input to layer is placed between brackets after defining layer
 
 3 - Creating the Model
 - After creating  layers and connecting, define the model
@@ -875,7 +874,6 @@ How does it work ?
 - Keras has a Model class. You only have to specify input and output layers
 ]
 .right-column30[
-<br/>
 <br/>
 <img src="images/functional_input.png" style="width: 190px;margin-left: 15%" />
 <br/>
@@ -885,7 +883,9 @@ How does it work ?
 <br/>
 <br/>
 <br/>
+<br/>
 <img src="images/functional_connect_layers.png" style="width: 200px;margin-left: 15%" />
+<br/>
 <br/>
 <br/>
 <br/>
