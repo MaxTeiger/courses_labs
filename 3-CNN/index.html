@@ -30,7 +30,7 @@ Guillaume Ligner - Côme Arvis
 ---
 # Kaggle project instructions
 .small90[
-End date: 12/15/2018 at midnight
+End date: December 15th, 2018 at midnight 
 
 Register link: [https://www.kaggle.com/t/abad7193e5db43a58968a1d0ed1fb198](https://www.kaggle.com/t/abad7193e5db43a58968a1d0ed1fb198)
 
@@ -43,7 +43,7 @@ For evaluation you have to provide:
 - Final version of your code:
     - Must allow to generate a csv file with your team's results in it 
 - Report
-    - PDF format
+    - PDF format, 2-3 pages
     - Must explain what you did to tackle the challenge
     - Include tries that might not have worked but that are still relevant
 ]
@@ -267,7 +267,7 @@ We just showed that:
 ]
 ---
 
-## Multiple convolutions
+# Multiple convolutions
 
 .center[
           <img src="images/convmap1.png" style="width: 200px;margin-top: -5%" />
@@ -293,7 +293,7 @@ We just showed that:
 
 
 ---
-## Multiple convolutions
+# Multiple convolutions
 
 .center[
           <img src="images/convmap2.png" style="width: 300px;margin-top: -5%" />
@@ -308,7 +308,7 @@ We just showed that:
 ]
 
 ---
-## Multiple convolutions
+# Multiple convolutions
 
 .center[
           <img src="images/convmap3.png" style="width: 300px;margin-top: -5%" />
@@ -324,7 +324,7 @@ We just showed that:
 - Each kernel extracts a type of characteristic at all locations of the image and outputs $1$ more feature map
 ]
 ---
-## Multiple convolutions
+# Multiple convolutions
 
 .center[
           <img src="images/convmap4.png" style="width: 300px;margin-top: -5%" />
@@ -346,7 +346,7 @@ We just showed that:
 ]
 ---
 
-## MLP vs Convolutional Network codes
+# MLP vs Convolutional Network codes
 **Fully Connected Network: MLP (Keras functional API)**
 
 ```python
@@ -376,7 +376,7 @@ convnet = Model(inputs=input_image, outputs=x)
 ]
 ---
 
-## Strides
+# Strides
 .small80[
 - Strides: increment step size for the convolution operator
   - For stride size $k$ kernel performs convolution operation, skips next $k-1$ pixels and performs another convolution operation and so on
@@ -393,7 +393,7 @@ Example with kernel size $3 \times 3$ and a stride of $2$ (image in blue)
 ]
 ---
 
-## Padding
+# Padding
 [//]: #  (Useful to keep output spatial dimension of feature maps constant across kernels of different shapes)
 <br/>
 - Padding: artificially fill borders of image
@@ -407,7 +407,7 @@ Example with kernel size $3 \times 3$ and a stride of $2$ (image in blue)
 ---
 
 
-## Dealing with shapes
+# Dealing with shapes
 
 **Kernel** or **Filter** shape $(F, F, C^i, C^o)$
 
@@ -448,7 +448,7 @@ $(P)$ being the amount of zero padding around borders, $(S)$ stride applied
 ] 
 ---
 
-## Dealing with shapes
+# Dealing with shapes
 Reminders about padding
 .left-column50.small70[
 - Sometimes convenient to pad input around borders
@@ -469,7 +469,7 @@ Reminders about padding
 ]
 ---
 
-## Dealing with shapes
+# Dealing with shapes
 .small70[
 **What we learn from previous example**
 - In left example above on left the input dimension was 5 and the output dimension was also 5
@@ -495,7 +495,7 @@ Reminders about padding
 ]
 ---
 
-## Pooling
+# Pooling
 
 - Local invariance
 - No parameters: max or average of $2 \times 2$ units
@@ -510,47 +510,45 @@ Reminders about padding
 
 ---
 
-## Hierarchical representation
+# Hierarchical representation
 
 .center[
           <img src="images/lecunconv.png" style="width: 760px;" />
 ]
 ---
 
-.big150[**Pre-trained models**]
---
-.small90[
+# Pre-trained models
+.small80[
 - Training a model to perform a computer vision task can take days if it has to extract a lot of different concepts in images and has to train on millions of images
 ]
 --
-.small90[
+.small80[
 - Many models trained on ImageNet and their weights are publicly available
 ]
-<br/>
---
 
-.big150[**Transfer learning**]
---
-.small90[
+
+### Transfer learning
+
+.small80[
 - Load a public model
 ]
 --
-.small90[
-- Use pre-trained weights by removing layers involved in providing the answer to the problem (fully connected layers)
-  - Stop at the last layer that extracts concepts (conv/pool layers)
+.small80[
+- Use pre-trained weights by removing layers involved in providing the answer to the problem (fully connected layers)</br>
+&rarr; Stop at the last layer that extracts concepts (conv/pool layers)
 - Loaded network is used as a generic feature extractor
 ]
 --
-.small90[
+.small80[
 - Add your own set of fully connected layers that lead to the answer using the high-level representation of the image
 ]
 --
-.small90[
+.small80[
 - Train the weights of the newly added layers on a new classification task
 ]
 ---
 
-## Data augmentation
+# Data augmentation
 .left-column40[<img src="images/cat.jpeg" style="width: 180px;margin-top: 3%" />]
 --
 .-column60[<img src="images/data_aug_2.png" style="width: 400px;" />]
@@ -558,7 +556,7 @@ Reminders about padding
 .center[<img src="images/data_aug_1.png" style="width: 650px;margin-top: 7%" />]
 ---
 
-## Data Augmentation
+# Data augmentation
 
 With Keras:
 
@@ -582,93 +580,36 @@ model.fit_generator(train_flow, train_flow.n)
 ```
 ---
 
-##  Residual Networks: ResNet
+# ImageNet: an image database
 
-.center[<img src="images/resnet_plain.png" style="width: 775px;margin-top: 0%;margin-left: -5%" />]
-.center[<img src="images/resnet_skip.png" style="width: 775px;margin-top: 3%;margin-left: -5%" />]
-.small70[
-Why ?
-- When network without ResNet skip connections goes deeper and deeper, training may go wrong
-   - No longer extracts anything more useful from current feature maps
-- Network can neither stabilize current feature maps by learning identity function that is difficult to learn or go back to previous feature map
-- Results during training end up becoming worse
+.center[
+<img src="images/imagenet_results.png" style="width: 500px;margin-top: 0%;margin-left: 0%" />
 ]
 
----
-
-##  Residual Networks: ResNet
-
-.center[<img src="images/resnet_plain.png" style="width: 775px;margin-top: 0%;margin-left: -5%" />]
-.center[<img src="images/resnet_skip.png" style="width: 775px;margin-top: 3%;margin-left: -5%" />]
-.small80[
-- $1$ every $2$ activations is propagated $2$ layers forward through a "skip connection"
-]
-
-.left-column40[<img src="images/residualblock.png" style="width: 240px;margin-top: 3%" />]
-.right-column60.small70[
-- Input block: $x$ output: $x + F(x)$; $F(x) = W \cdot x + b$
-   - $W,b$ some learned parameters
-- A block learns the residual with respect to the identity 
-   - Block learns $F(x)$ which is the residual (difference) of the output $F(x) + x$ with respect to the identity $x$
-]
----
-
-##  Residual Networks: ResNet
-
-.center[<img src="images/resnet_plain.png" style="width: 775px;margin-top: 0%;margin-left: -5%" />]
-.center[<img src="images/resnet_skip.png" style="width: 775px;margin-top: 3%;margin-left: -5%" />]
-.left-column50.small90[
-Why does it work ?
-<img src="images/resnet_al2.png" style="width: 370px;margin-top: 15%;margin-left: -10%" />
-]
-
-.right-column50.small70[
-- $a^{l+2} = g(z^{l+2} + a^{l})$; $g(x) = reLU(x)$
-- $a^{l+2} = g(W^{l+2} \cdot a^{l+1} + b^{l+2} + a^{l})$
-  - if $W^{l+2} = 0$ and $b^{l+2} = 0$ then $a^{l+2} = g(a^{l}) = a^{l}$; **$a^{l}$ copied to $a^{l+2}$**
-- .firebrick[Means that identity function can easily be learned]
-- Somehow guaranteed that performance will either stabilize or improve 
-]
----
-
-class:middle, center
-
-# Architectures
----
-.big150[**ImageNet**]
-<br/><br/>
-.left-column50[
-<img src="images/imagenet_results.png" style="width: 422px;margin-top: -5%;margin-left: -15%" />
-]
-.right-column50[
-.small60[
 - Since 2010 **ImageNet Large Scale Visual Recognition Challenge** (**ILSVRC**) is the competition where research teams evaluate their algorithms on the "ImageNet" image database
 - They compete to achieve higher accuracy on several visual recognition tasks
 - In **2012** **AlexNet** improved previous best score by **36**%
-]
-]
-.left-column60[
-.big150[**AlexNet**]
-.small60[
-- Depth of the model was essential for its high performance
-   - Computationally expensive, made feasible due to GPUs
-- AlexNet contained eight layers; the first five were convolutional <br/>
-layers, and the last three were fully connected layers
-- Marked start of an industry-wide artificial intelligence boom in <br/>
-usage of deep convolutional networks
-]
-]
-.right-column40[
-<img src="images/alexnet.png" style="width: 380px;margin-top: 25%;margin-left: -11%" />
-]
+
 ---
-## VGG
-.small70[**VGG-16**]
+
+# Architectures: AlexNet
+
 .center[
-          <img src="images/vgg.png" style="width: 390px;margin-top: -7%;margin-left: -10%" />
+<img src="images/alexnet.png" style="width: 750px;margin-top: 0%;margin-left: 0%" />
 ]
-.footnote.small70[
-Simonyan, Karen, and Zisserman. "Very deep convolutional networks for large-scale image recognition." (2014)
+
+- Depth of the model was essential for its high performance<br/>
+&rarr; Computationally expensive, made feasible due to GPUs
+- **AlexNet** contained eight layers; the first **five** were **convolutional
+layers**, and the last **three** were **fully connected** layers
+- Marked start of an industry-wide artificial intelligence boom in
+usage of **deep convolutional networks**
+
+---
+# Architectures: VGG-16
+
+.center[
+          <img src="images/vgg.png" style="width: 500px;margin-top: 0%;margin-left: 0%" />
 ]
 <br/>
 .small70[
@@ -682,7 +623,8 @@ Simonyan, Karen, and Zisserman. "Very deep convolutional networks for large-scal
 
 ---
 
-#### .big150[**Compute VGG memory and parameters**]
+# VGG memory and parameters
+
 ```md
            Activation maps          Parameters
 INPUT:     [224x224x3]   = 150K     0
@@ -712,7 +654,9 @@ TOTAL activations: 24M x 4 bytes ~=  93MB / image (x2 for backward)
 TOTAL parameters: 138M x 4 bytes ~= 552MB (x2 for plain SGD, x4 for Adam)
 ```
 ---
-#### .big150[**Compute VGG memory and parameters**]
+
+# VGG memory and parameters
+
 ```md
            Activation maps          Parameters
 INPUT:     [224x224x3]   = 150K     0
@@ -742,7 +686,58 @@ TOTAL activations: 24M x 4 bytes ~=  93MB / image (x2 for backward)
 TOTAL parameters: 138M x 4 bytes ~= 552MB (x2 for plain SGD, x4 for Adam)
 ```
 ---
-## State of the art
+
+#  Residual Networks: ResNet
+
+.center[<img src="images/resnet_plain.png" style="width: 775px;margin-top: 0%;margin-left: -5%" />]
+.center[<img src="images/resnet_skip.png" style="width: 775px;margin-top: 3%;margin-left: -5%" />]
+.small70[
+Why ?
+- When network without ResNet skip connections goes deeper and deeper, training may go wrong
+   - No longer extracts anything more useful from current feature maps
+- Network can neither stabilize current feature maps by learning identity function that is difficult to learn or go back to previous feature map
+- Results during training end up becoming worse
+]
+
+---
+
+#  Residual Networks: ResNet
+
+.center[<img src="images/resnet_plain.png" style="width: 775px;margin-top: 0%;margin-left: -5%" />]
+.center[<img src="images/resnet_skip.png" style="width: 775px;margin-top: 3%;margin-left: -5%" />]
+.small80[
+- $1$ every $2$ activations is propagated $2$ layers forward through a "skip connection"
+]
+
+.left-column40[<img src="images/residualblock.png" style="width: 240px;margin-top: 3%" />]
+.right-column60.small70[
+- Input block: $x$ output: $x + F(x)$; $F(x) = W \cdot x + b$
+   - $W,b$ some learned parameters
+- A block learns the residual with respect to the identity 
+   - Block learns $F(x)$ which is the residual (difference) of the output $F(x) + x$ with respect to the identity $x$
+]
+---
+
+#  Residual Networks: ResNet
+
+.center[<img src="images/resnet_plain.png" style="width: 775px;margin-top: 0%;margin-left: -5%" />]
+.center[<img src="images/resnet_skip.png" style="width: 775px;margin-top: 3%;margin-left: -5%" />]
+.left-column50.small90[
+Why does it work ?
+<img src="images/resnet_al2.png" style="width: 370px;margin-top: 15%;margin-left: -10%" />
+]
+
+.right-column50.small70[
+- $a^{l+2} = g(z^{l+2} + a^{l})$; $g(x) = reLU(x)$
+- $a^{l+2} = g(W^{l+2} \cdot a^{l+1} + b^{l+2} + a^{l})$
+  - if $W^{l+2} = 0$ and $b^{l+2} = 0$ then $a^{l+2} = g(a^{l}) = a^{l}$; **$a^{l}$ copied to $a^{l+2}$**
+- .firebrick[Means that identity function can easily be learned]
+- Somehow guaranteed that performance will either stabilize or improve 
+]
+
+---
+
+# State of the art
 .small80[
 Automated finding of right architectures:
 - Reinforcement Learning
@@ -759,66 +754,73 @@ Automated finding of right architectures:
 ]
   
 ---
-## Beyond Image Classification
 
-.big120[
-**Object detection**
-]
-.small90[
+# Beyond Image Classification
+
+### Object detection
+
 - We don't know in advance the number of objects in the image
 - Object detection relies on *object proposal* and *object classification*
-]
+
 --
-.small90[
+
 **Object proposal:** find regions of interest (RoIs) in the image
-]
---
-.small90[
+
 **Object classification:** classify the object in these regions
-]
+
 --
+
 <br/>
-.firebrick.small90[
+.firebrick[
 **Object Detection = Object proposal + Object classification**
 ]
---
+
 .small90[
-- **One example: YOLO algorithm**
+- One example: **YOLO algorithm**
 ]
---
-<br/>
-.big120[
-**Segmentation**
-]
-.small90[
+
+---
+
+# Beyond Image Classification
+
+### Segmentation
+
 - Output a class map for each pixel (for example: cat vs background)
   - We predict a class for each pixel in image
   - Usually classes are: "pixel belongs to object of interest" or "pixel does **NOT** belong to object of interest (background)"
-- **One example: Mask-RCNN**
-  ]
+
+.small90[
+- One example: **Mask-RCNN**
+]
+
 ---
 
-## Beyond Image Classification
+# Beyond Image Classification
+
 .center[
 <img src="images/detection_segmentation.png" style="width: 960px;margin-top: 0%;margin-left: -15%" />
 ]
 ---
- ## YOLO - You Only Look Once
+
+# YOLO - You Only Look Once
+
 .center[
-          <img src="images/yolo1.png" style="width: 475px;" />
+<img src="images/yolo1.png" style="width: 450px;" />
 ]
 .footnote.small[Redmon, Joseph, et al. "You only look once: Unified, real-time object detection." CVPR (2016)]
 --
 .small90[
-For each cell of the $S \times S$ predict:
+For each cell of the $S \times S$, predict:
 - $B$ **boxes** sets of coordinates ($4$ values to define each box's coordinates)
 - $B$ **confidence scores** C ($1$ per box)
 - $k$ probabilities, $1$ proba per class. Each proba is the probability of this class being inside the cell conditioned on an object being in cell
 ]
 ---
- ## YOLO - You Only Look Once
+
+# YOLO - You Only Look Once
+
 .center[
-          <img src="images/yolo1.png" style="width: 475px;" />
+<img src="images/yolo1.png" style="width: 450px;" />
 ]
 .footnote.small[Redmon, Joseph, et al. "You only look once: Unified, real-time object detection." CVPR (2016)]
 .small90[
@@ -828,9 +830,10 @@ For each cell of the $S \times S$:
 ]
 
 ---
- ## YOLO - You Only Look Once
+
+# YOLO - You Only Look Once
 .center[
-          <img src="images/yolo1.png" style="width: 475px;" />
+<img src="images/yolo1.png" style="width: 450px;" />
 ]
 .footnote.small[Redmon, Joseph, et al. "You only look once: Unified, real-time object detection." CVPR (2016)]
 .small80[
@@ -843,11 +846,10 @@ For each cell of the $S \times S$:
 
 ---
 
-
-## Mask-RCNN
-- Detection + segmentation
+# Mask-RCNN
+Detection + segmentation
 .center[
-          <img src="images/mask_rcnn.png" style="width: 550px;margin-top: 5%;" />
+<img src="images/mask_rcnn.png" style="width: 550px;margin-top: 5%;" />
 ]
 
 
