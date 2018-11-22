@@ -691,10 +691,10 @@ TOTAL parameters: 138M x 4 bytes ~= 552MB (x2 for plain SGD, x4 for Adam)
 
 .center[<img src="images/resnet_plain.png" style="width: 775px;margin-top: 0%;margin-left: -5%" />]
 .center[<img src="images/resnet_skip.png" style="width: 775px;margin-top: 3%;margin-left: -5%" />]
-.small70[
+.small80[
 Why ?
-- When network without ResNet skip connections goes deeper and deeper, training may go wrong
-   - No longer extracts anything more useful from current feature maps
+- When network without ResNet skip connections goes deeper and deeper, training may go wrong</br>
+&rarr; no longer extracts anything more useful from current feature maps
 - Network can neither stabilize current feature maps by learning identity function that is difficult to learn or go back to previous feature map
 - Results during training end up becoming worse
 ]
@@ -705,8 +705,8 @@ Why ?
 
 .center[<img src="images/resnet_plain.png" style="width: 775px;margin-top: 0%;margin-left: -5%" />]
 .center[<img src="images/resnet_skip.png" style="width: 775px;margin-top: 3%;margin-left: -5%" />]
-.small80[
-- $1$ every $2$ activations is propagated $2$ layers forward through a "skip connection"
+.center[
+$1$ every $2$ activations is propagated $2$ layers forward through a "skip connection"
 ]
 
 .left-column40[<img src="images/residualblock.png" style="width: 240px;margin-top: 3%" />]
@@ -729,8 +729,8 @@ Why does it work ?
 
 .right-column50.small70[
 - $a^{l+2} = g(z^{l+2} + a^{l})$; $g(x) = reLU(x)$
-- $a^{l+2} = g(W^{l+2} \cdot a^{l+1} + b^{l+2} + a^{l})$
-  - if $W^{l+2} = 0$ and $b^{l+2} = 0$ then $a^{l+2} = g(a^{l}) = a^{l}$; **$a^{l}$ copied to $a^{l+2}$**
+- $a^{l+2} = g(W^{l+2} \cdot a^{l+1} + b^{l+2} + a^{l})$</br>
+&rarr; if $W^{l+2} = 0$ and $b^{l+2} = 0$ then $a^{l+2} = g(a^{l}) = a^{l}$ </br> &rarr; **$a^{l}$ copied to $a^{l+2}$**
 - .firebrick[Means that identity function can easily be learned]
 - Somehow guaranteed that performance will either stabilize or improve 
 ]
@@ -749,7 +749,7 @@ Automated finding of right architectures:
 ]
 .right-column60[
 - An RL algorithms samples Deep Convolutional Network architectures
-- Rewards are the accuracies on test set
+- Rewards are the accuracies on validation set
 - Algorithms becomes better and better at selecting right architectures for the problem at hand
 ]
   
@@ -807,14 +807,12 @@ Automated finding of right architectures:
 .center[
 <img src="images/yolo1.png" style="width: 450px;" />
 ]
-.footnote.small[Redmon, Joseph, et al. "You only look once: Unified, real-time object detection." CVPR (2016)]
---
-.small90[
+
 For each cell of the $S \times S$, predict:
 - $B$ **boxes** sets of coordinates ($4$ values to define each box's coordinates)
 - $B$ **confidence scores** C ($1$ per box)
-- $k$ probabilities, $1$ proba per class. Each proba is the probability of this class being inside the cell conditioned on an object being in cell
-]
+- $k$ **probabilities**, $1$ proba per class. Each proba is the probability of this class being inside the cell conditioned on an object being in cell
+
 ---
 
 # YOLO - You Only Look Once
@@ -822,12 +820,10 @@ For each cell of the $S \times S$, predict:
 .center[
 <img src="images/yolo1.png" style="width: 450px;" />
 ]
-.footnote.small[Redmon, Joseph, et al. "You only look once: Unified, real-time object detection." CVPR (2016)]
-.small90[
+
 For each cell of the $S \times S$:
 - Confidence scores are {$C_1, ..., C_B$}, probabilities are {$p_1, ..., p_k$}
 - There are $B \times k$ $(C_i, p_j)$ pairs for each gridcell
-]
 
 ---
 
@@ -835,14 +831,11 @@ For each cell of the $S \times S$:
 .center[
 <img src="images/yolo1.png" style="width: 450px;" />
 ]
-.footnote.small[Redmon, Joseph, et al. "You only look once: Unified, real-time object detection." CVPR (2016)]
-.small80[
+
 For each cell of the $S \times S$:
-- Condidering pairs $(C_i, p_j)$ we keep cases where probability to have an object in cell is high AND probability of classified object is high
+- Condidering pairs $(C_i, p_j)$ we keep cases where probability to **have an object in cell** is high AND **probability of classified object** is high
 - We define a thresold
 - Final detection (localisation + classif): pair's gridcell and class $j$ where  **$C_i \times p_j > thresold$**
-]
-
 
 ---
 
