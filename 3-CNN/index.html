@@ -128,7 +128,7 @@ $(k \star im) (x, y) = \sum\limits\_{n=0}^2 \sum\limits\_{m=0}^2 k(n, m) . im(x 
 ]
 --
 .small80[
-- Kernel $k$ here is of shape $(n,m)$ and image $im$ of shape $(5,5)$</br>
+- Kernel $k$ here is of shape $(3,3)$ and image $im$ of shape $(5,5)$</br>
 What is actually happening ?
 ]
 --
@@ -159,14 +159,13 @@ What is actually happening ?
 .small70[
 - What does the convolution operation become in the $3d$ case ?
 ]
---
-.left-column100[<img src="images/3d_conv_operation.png" style="width: 500px;margin-top: 0%;margin-left: 5%" />]
---
 .small90[
-<br/><br/><br/><br/>
+$(k \star im) (x, y, z) = \sum\limits\_{n=0}^{4-1} \sum\limits\_{n=0}^{4-1} \sum\limits\_{c=0}^{3-1} k(n, m, c) . im(x + n, y + m, z + c)$
+]
+<br/>
+.small90[
 Then again, what is actually happening ?
 ]
---
 .left-column30[<img src="images/convolution.gif" style="width: 300px;margin-top: 2%;margin-left: -10%" />]
 .right-column70.small70[
 - Outputted elements formed by applying a $3d$ kernel to corresponding $3d$ regions in input
