@@ -514,9 +514,9 @@ Intuition of why it works:
 --
 
 - Both benefit from using negative-sampling:
-  - In addition to the classic positive examples in the training set, negative examples are provided
-  - Negative examples are wrong inputs for which no outputs can be determined
-  - Negative examples should produce a one-hot encoded vector of all $0$s
+  - Only a sample of negative examples is updated at each iteration
+  - It allows the model to simplify the softmax calculation when $|\mathbb{V}|$ becomes large
+  - More details on it on to next class
 ---
 
 # Word vectors with t-SNE
