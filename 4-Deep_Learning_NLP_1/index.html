@@ -20,7 +20,7 @@
     <textarea id="source">
 class: center, middle
 
-# Deep Learning for Natural Language Processing 
+# Deep Learning for Natural Language Processing - Part 1
 
 Guillaume Ligner - Côme Arvis
 
@@ -360,7 +360,7 @@ Let's see an example of $2$ words that are semantically equivalent, e.g. "*begin
 A CBoW Word2vec example with .big110[**$3$**] words as context: the one-hot encoded vectors $x_0$, $x_1$ and $x_2$ 
 ]
 .center[
-<img src="images/cbow_diag.png" style="width: 600px;margin-top: 3%;" />
+<img src="images/cbow_diag.png" style="width: 800px;margin-top: 3%;margin-left: -3%;" />
 ]
 ---
 
@@ -377,10 +377,10 @@ Looking at previous example:
 ]
 --
 .small90[
-- Since $h_0 = W_0 \cdot x_0$ and $x_0$ one-hot encoded, $h_0$ representation of $W_0$ is also the first column ($W_0$'s $0$ indexed column) of $W_0$
+- Since $h_0 = W_h \cdot x_0$ and $x_0$ one-hot encoded, $h_0$ representation of $W_h$ is also the first column ($W_h$'s $0$ indexed column) of $W_h$
 ]
 .small90[
-- $W_0 \in \mathbb{R}^{H \times V}$ is the embedding matrix of the words
+- $W_h \in \mathbb{R}^{H \times V}$ is the embedding matrix of the words
   - Each column at index $i$ is the representation of word $i$ in $\mathbb{V}$
 ]
 ---
@@ -419,13 +419,13 @@ Let's see Skip Gram through an example
 ---
 
 # Word2vec: Skip Gram
-.small90[
+.small80[
 Here’s the architecture of our neural network:
 - Vocabulary has $10 000$ words and we want $300$ dimensional representation vectors
 - Thus weight matrix $W_h$ (that leads to hidden layer) $\in \mathbb{R}^{10000 \times 300}$
 ]
 .center[
-<img src="images/skip_gram_net_arch.png" style="width: 580px;margin-top: -2%" />
+<img src="images/skip_gram_net_arch.png" style="width: 540px;margin-top: -2%" />
 ]
 ---
 
@@ -458,65 +458,65 @@ From previous example:
 # Word2vec: Skip Gram
 .small90[
 Intuition of why it works:
+]
 .center[
-<img src="images/similar_contexts.png" style="width: 700px; margin-top: 0%" />
+<img src="images/similar_contexts.png" style="width: 700px;" />
+]
+<br/>
+.center[
+Words semantically similar have similar "contexts" (words around them)
+]
+---
+
+# Word2vec: Skip Gram
+.small90[
+Intuition of why it works:
+]
+.center[
+<img src="images/skip_same_output_vectors.png" style="width: 900px;margin-left: -10%;margin-top: 2%" />
 ]
 <br/>
 - $2$ words semantically similar have similar "contexts" (words around them)
-]
----
-
-# Word2vec: Skip Gram
-.small90[
-Intuition of why it works:
-.center[
-<img src="images/skip_same_output_vectors.png" style="width: 870px;margin-top: 0%;margin-left: -8%" />
-]
-<br/>
-- $2$ words semantically similar have similar "contexts" (words around them)<br/><br/>
 - Those $2$ words have been trained to output the same words (the same one-hot encoded vectors)
-]
 ---
 
 # Word2vec: Skip Gram
 .small90[
 Intuition of why it works:
+]
 .center[
-<img src="images/skip_same_output_distributions.png" style="width: 870px;margin-top: 2%;margin-left: -8%" />
+<img src="images/skip_same_output_distributions.png" style="width: 900px;margin-left: -10%;margin-top: 2%" />
 ]
 <br/>
 - Thus, post training, those $2$ words, as inputs, lead to similar softmax distributions of words around them as outputs
-]
 ---
 
 # Word2vec: Skip Gram
 .small90[
 Intuition of why it works:
+]
 .center[
-<img src="images/skip_same_hidden.png" style="width: 870px;margin-top: 2%;margin-left: -8%" />
+<img src="images/skip_same_hidden.png" style="width: 900px;margin-left: -10%;margin-top: 2%" />
 ]
 <br/>
-- Thus, post training, those $2$ words, as inputs, lead to similar softmax distributions of words around them as outputs<br/><br/>
+- Thus, post training, those $2$ words, as inputs, lead to similar softmax distributions of words around them as outputs
 - For the outputs to be very similar the $2$ hidden layers must be very similar
-]
 ---
 
 # Word2vec: Skip Gram
 .small90[
 Intuition of why it works:
+]
 .center[
-<img src="images/skip_same_hidden.png" style="width: 870px;margin-top: 2%;margin-left: -8%" />
+<img src="images/skip_same_hidden.png" style="width: 900px;margin-left: -10%;margin-top: 2%" />
 ]
 <br/>
-- Thus **words with similar contexts end-up having similar hidden layers**<br/><br/>
+- Thus **words with similar contexts end-up having similar hidden layers**
 - .firebrick[Hidden layer can be used as representation vector]
-]
 ---
 
 # Word2vec: CBoW vs Skip Gram
 - CBoW turns out to be a useful thing for smaller datasets<br/><br/>
---
-
 - Skip-gram, by treating each context-target pair as a new observation, tends to do better when we have larger datasets<br/><br/>
 --
 
@@ -656,18 +656,6 @@ In case of separate parameters at each time index value
 - Also no sharing statistical strength across different sequence lengths and across different positions in time
 ]
 
-[//]: # (C'est quoi cette slide ? Ça reprend beaucoup le schéma d'avant mais les dims sont changées ? Avec des embeddings ? Pas compris)
-
-[//]: # (# Recurrent Neural Network)
-
-[//]: # (.center[<img src="images/unrolled_rnn_words.svg" style="width: 400px;" />])
-
-[//]: # (Input embedding $\mathbf{E}$  .right-column20[.firebrick[$|V| \times H$]])
-
-[//]: # (Recurrent weights $\mathbf{W^h}$  .right-column20[.firebrick[$H \times H$]])
-
-[//]: # (Output weights $\mathbf{W^{out}}$ .right-column20[ .firebrick[$H \times K = H \times |V|$]])
-
 ---
 
 # Backpropagation through time
@@ -750,7 +738,7 @@ LSTM cell
 # LSTM in detail
 
 .center[
-<img src="images/lstm_1.png" style="width: 500px;" />
+<img src="images/lstm_1.png" style="width: 500px;margin-top: -5%" />
 ]
 
 .center[
@@ -760,11 +748,14 @@ $f\_t = \sigma(W\_f \cdot [h\_{t-1}, x\_t] + b\_f)$
 - The **forget gate layer**: will quantify the proportion of the previous cell state $C_{t-1}$ to keep
 - Basically, this gate allows the LSTM to forget the information that is no longer required to understand things (a pronoun in a sentence for instance)
 ]
+.small80[
+Example: **forget** the gender of the old subject when we see a new one
+]
 ---
 # LSTM in detail
 
 .center[
-<img src="images/lstm_2.png" style="width: 500px;" />
+<img src="images/lstm_2.png" style="width: 500px;margin-top: -5%" />
 ]
 
 .center[
@@ -776,11 +767,14 @@ $\tilde{C}\_t = tanh(W\_C \cdot [h\_{t-1}, x\_t] + b\_C)$
 - The **candidate layer**: generates new candidate values to be added to the current state
 Those parts are responsible for the selection and the addition of information to the cell state
 ]
+.small80[
+Example: **add** the gender of the new subject to the cell state, to replace the old one we’re forgetting
+]
 ---
 # LSTM in detail
 
 .center[
-<img src="images/lstm_3.png" style="width: 500px;" />
+<img src="images/lstm_3.png" style="width: 500px;margin-top: -5%" />
 ]
 
 .center[
@@ -797,7 +791,7 @@ $C\_t = f\_t \odot C\_{t-1} + i\_t \odot \tilde{C}$
 # LSTM in detail
 
 .center[
-<img src="images/lstm_4.png" style="width: 500px;" />
+<img src="images/lstm_4.png" style="width: 500px;margin-top: -5%" />
 ]
 
 .center[
@@ -808,7 +802,9 @@ $h\_t = o\_t \odot tanh(C_t)$
 .small85[
 - The **output gate layer**: will retrieve the useful information by doing an element-wise product between the output and the squashed cell state
 ]
-
+.small80[
+Example: **output** whether the subject is singular or plural as it will be a necessary information to conjugate the verb that follows
+]
 ---
 
 # LSTM cell in pseudo-code
