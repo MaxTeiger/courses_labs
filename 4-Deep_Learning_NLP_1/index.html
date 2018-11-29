@@ -357,7 +357,7 @@ Let's see an example of $2$ words that are semantically equivalent, e.g. "*begin
 
 # Word2vec: CBOW
 .small90[
-A CBoW Word2vec example with .big110[**$3$**] words as context: the one-hot encoded vectors $x_0$, $x_1$ and $x_2$ 
+A CBOW Word2vec example with .big110[**$3$**] words as context: the one-hot encoded vectors $x_0$, $x_1$ and $x_2$ 
 ]
 .center[
 <img src="images/cbow_diag.png" style="width: 800px;margin-top: 3%;margin-left: -3%;" />
@@ -422,7 +422,7 @@ Let's see Skip Gram through an example
 .small80[
 Here’s the architecture of our neural network:
 - Vocabulary has $10 000$ words and we want $300$ dimensional representation vectors
-- Thus weight matrix $W_h$ (that leads to hidden layer) $\in \mathbb{R}^{10000 \times 300}$
+- Thus weight matrix $W_h$ (that leads to hidden layer) $\in \mathbb{R}^{300 \times 10000}$
 ]
 .center[
 <img src="images/skip_gram_net_arch.png" style="width: 540px;margin-top: -2%" />
@@ -443,16 +443,9 @@ From previous example:
 ]
 --
 .small90[
-- Similarly to CBoW, since $\underset{(1,300)}{h} = \underset{(1,10000)}{x} \times \underset{(10000,300)}{W_h}$ and $x$ is one-hot encoded, $h$ is actually the $i^{th}$ line in hidden weight matrix $W_h$, $i$ being the non-zero index element in $x$
+- Similarly to CBOW, since $\underset{(300,1)}{h} = \underset{(300,10000)}{W_h} \times \underset{(10000,1)}{x}$ and $x$ is one-hot encoded, $h$ is actually the $i^{th}$ column in hidden weight matrix $W_h$, $i$ being the non-zero index element in $x$
 ]
 
-.left-column70[
-<img src="images/matrix_mult_w_one_hot.png" style="width: 500px;margin-top: 2%" />
-]
-.right-column30.small80[
-- Effect of multiplying a one-hot encoded vector by a matrix
-- It just selects the matrix row at the $1$'s index
-]
 ---
 
 # Word2vec: Skip Gram
