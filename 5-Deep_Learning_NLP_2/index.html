@@ -596,7 +596,7 @@ $
 - Instead of image pixels, input is a sentence or document represented as a matrix
 - Each row is a token, word or character
    - An embedding (word2vec, GloVe etc.) or one-hot encoded vector
-- Case input is sentence $ = 10$ words, each word a $10$ dimensional embedding
+- Case input is sentence $ = 10$ words, each word a $100$ dimensional embedding
    -  $(10,100)$ shaped matrix
    - That's the "image" equivalent for CNN
 ---
@@ -753,7 +753,7 @@ CNN architecture example for NLP classification
 ]
 .left-column30.small70[
 - Use the vector of features
-- Compute softmax $P(v_i|input) \in [0,1]^V$
+- Compute softmax $P(y_i|input) \in [0,1]^V$
 ]
 ---
 
