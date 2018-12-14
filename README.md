@@ -14,7 +14,7 @@ Courses and labs will be added and updated in weeks, please be sure to pull freq
 - Week 3: [Convolutional Neural Networks](https://ece-deep-learning.github.io/courses_labs/3-CNN/index.html)
 - Week 4: [Deep Learning for Natural Language Processing 1](https://ece-deep-learning.github.io/courses_labs/4-Deep_Learning_NLP_1/index.html)
 - Week 5: [Deep Learning for Natural Language Processing 2](https://ece-deep-learning.github.io/courses_labs/5-Deep_Learning_NLP_2/index.html)
-- Week 6: Unsupervised Generative Neural Networks
+- Week 6: [Unsupervised Generative Neural Networks](https://ece-deep-learning.github.io/courses_labs/6-Unsupervised_Generative_Neural_Networks/index.html)
 
 ### Lab requirements
 
